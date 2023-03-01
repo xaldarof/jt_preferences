@@ -40,4 +40,29 @@ class JtPreferences extends Preferences {
   Future<String?> getString(String key) {
     return _manager.getString(key);
   }
+
+  @override
+  Future<bool?> getBoolean(String key) {
+    return _manager.getBoolean(key);
+  }
+
+  @override
+  Future<double?> getDouble(String key) {
+    return _manager.getDouble(key);
+  }
+
+  @override
+  Future<bool> setBool(String key, bool? value) {
+    return _manager.setBool(key, value);
+  }
+
+  @override
+  Future<bool> setDouble(String key, double? value) {
+    return _manager.setDouble(key, value);
+  }
+
+  @override
+  Stream<String> listenKey(String key) {
+    return _manager.listenKey(key);
+  }
 }
