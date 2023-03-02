@@ -2,17 +2,11 @@ name: jt_preferences
 description: Json key-value storage with AES encryption support.
 version: 1.5.1
 homepage: "https://github.com/xaldarof/jt_preferences"
-# repository: https://github.com/my_org/my_repo
 
 environment:
   sdk: '>=2.19.2 <3.0.0'
 
-# dependencies:
-#   path: ^1.8.0
 
 dev_dependencies:
   lints: ^2.0.0
   test: ^1.21.0
-
-dependencies:
-  path_provider: ^2.0.13

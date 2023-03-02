@@ -11,7 +11,7 @@ class FileManagerImpl extends FileManager {
 
   @override
   Future<Map<String, dynamic>> read() async {
-    final file = File(makeFile(await _directoryProvider.getFilesDir()));
+    final file = File(await _directoryProvider.getFilesDir());
     final json = await file.readAsString();
     final map = _mapper.decode(json);
     return map;
@@ -19,7 +19,7 @@ class FileManagerImpl extends FileManager {
 
   @override
   Future<bool> write(Map<String, dynamic> data) async {
-    final path = makeFile((await _directoryProvider.getFilesDir()));
+    final path = await _directoryProvider.getFilesDir();
     print(path);
     final file = File(path);
     await file.writeAsString(_mapper.encode(data), mode: FileMode.write);
@@ -31,9 +31,4 @@ class FileManagerImpl extends FileManager {
     required Mapper mapper,
   })  : _directoryProvider = directoryProvider,
         _mapper = mapper;
-
-  @override
-  String makeFile(String dir) {
-    return "$dir/preferences.json";
-  }
 }
