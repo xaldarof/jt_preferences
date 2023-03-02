@@ -91,10 +91,14 @@ class PreferencesManagerImpl extends PreferencesManager {
   }
 
   @override
-  Stream<String> listenKey(String key) async* {
+  Stream<dynamic> listen({String? key}) async* {
     await for (final event in _keyListener.stream) {
-      if (event == key) {
-        yield key;
+      if (key != null) {
+        if (event == key) {
+          yield key;
+        }
+      } else {
+        yield event;
       }
     }
   }

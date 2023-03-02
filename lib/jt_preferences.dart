@@ -62,7 +62,7 @@ class JtPreferences extends Preferences {
   }
 
   @override
-  Stream<String> listenKey(String key) {
-    return _manager.listenKey(key);
+  Stream<dynamic> listen({String? key}) {
+    return _manager.listen(key: key);
   }
 }
