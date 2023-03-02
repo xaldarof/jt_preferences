@@ -1,8 +1,9 @@
 import 'package:jt_preferences/adapter/data_mapper.dart';
 import 'package:jt_preferences/core/preferences.dart';
-import 'package:jt_preferences/file/directory_provider.dart';
-import 'package:jt_preferences/file/file_manager.dart';
 import 'package:jt_preferences/preferences_manager.dart';
+
+import 'file/dir/directory_provider_impl.dart';
+import 'file/file_manager_impl.dart';
 
 class JtPreferences extends Preferences {
   JtPreferences._();
