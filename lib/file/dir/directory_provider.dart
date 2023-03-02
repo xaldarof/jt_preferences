@@ -1,5 +1,5 @@
-
 abstract class DirectoryProvider {
-  Future<String> getFilesDir();
+  Future<String> getFilesDir(String rootPath);
+
   Future<void> createFile(String path);
 }

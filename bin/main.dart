@@ -1,6 +1,7 @@
 import 'package:jt_preferences/jt_preferences.dart';
 
 void main(List<String> args) async {
+  JtPreferences.initialize("path/path");
   final args = JtPreferences.getInstance();
   await args.setString('token', '123');
   await args.setInt('age', 18);

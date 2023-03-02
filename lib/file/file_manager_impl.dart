@@ -8,10 +8,11 @@ import 'file_manager.dart';
 class FileManagerImpl extends FileManager {
   final DirectoryProvider _directoryProvider;
   final Mapper _mapper;
+  final String _rootPath;
 
   @override
   Future<Map<String, dynamic>> read() async {
-    final file = File(await _directoryProvider.getFilesDir());
+    final file = File(await _directoryProvider.getFilesDir(_rootPath));
     final json = await file.readAsString();
     final map = _mapper.decode(json);
     return map;
@@ -19,7 +20,7 @@ class FileManagerImpl extends FileManager {
 
   @override
   Future<bool> write(Map<String, dynamic> data) async {
-    final path = await _directoryProvider.getFilesDir();
+    final path = await _directoryProvider.getFilesDir(_rootPath);
     print(path);
     final file = File(path);
     await file.writeAsString(_mapper.encode(data), mode: FileMode.write);
@@ -29,6 +30,8 @@ class FileManagerImpl extends FileManager {
   FileManagerImpl({
     required DirectoryProvider directoryProvider,
     required Mapper mapper,
+    required String rootPath,
   })  : _directoryProvider = directoryProvider,
-        _mapper = mapper;
+        _mapper = mapper,
+        _rootPath = rootPath;
 }

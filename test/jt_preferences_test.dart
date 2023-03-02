@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:jt_preferences/jt_preferences.dart';
 import 'package:test/test.dart';
 
 void main() {
+  JtPreferences.initialize(Directory.current.path);
   final preferences = JtPreferences.getInstance();
   group('test save values', () {
     test('set string test', () async {

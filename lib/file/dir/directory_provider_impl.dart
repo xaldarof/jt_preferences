@@ -1,11 +1,12 @@
 import 'dart:io';
+
 import 'directory_provider.dart';
 
 class DirectoryProviderImpl extends DirectoryProvider {
   @override
-  Future<String> getFilesDir() async {
+  Future<String> getFilesDir(String rootPath) async {
     final path =
-        "${Directory.systemTemp.path}${Platform.pathSeparator}jt_pref${Platform.pathSeparator}jtpreferences.json";
+        "$rootPath${Platform.pathSeparator}jt_pref${Platform.pathSeparator}jtpreferences.json";
     await createFile(path);
     return path;
   }

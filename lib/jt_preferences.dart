@@ -10,14 +10,19 @@ class JtPreferences extends Preferences {
 
   static late final PreferencesManager _manager;
   static final JtPreferences _instance = JtPreferences._();
+  static late String _path;
 
   static JtPreferences getInstance() {
     final dirProvider = DirectoryProviderImpl();
     final mapper = DataMapper();
-    final fileManager =
-        FileManagerImpl(directoryProvider: dirProvider, mapper: mapper);
+    final fileManager = FileManagerImpl(
+        directoryProvider: dirProvider, mapper: mapper, rootPath: _path);
     _manager = PreferencesManagerImpl(manager: fileManager);
     return _instance;
+  }
+
+  static initialize(String path) {
+    _path = path;
   }
 
   @override
