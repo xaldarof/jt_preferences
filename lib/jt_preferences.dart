@@ -7,18 +7,16 @@ import 'package:jt_preferences/preferences_manager.dart';
 class JtPreferences extends Preferences {
   JtPreferences._();
 
-  static late final JtPreferences _preferences;
   static late final PreferencesManager _manager;
   static final JtPreferences _instance = JtPreferences._();
 
   static JtPreferences getInstance() {
-    _preferences = _instance;
     final dirProvider = DirectoryProviderImpl();
     final mapper = DataMapper();
     final fileManager =
         FileManagerImpl(directoryProvider: dirProvider, mapper: mapper);
     _manager = PreferencesManagerImpl(manager: fileManager);
-    return _preferences;
+    return _instance;
   }
 
   @override
