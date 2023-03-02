@@ -2,17 +2,17 @@ import 'package:jt_preferences/jt_preferences.dart';
 
 void main(List<String> args) async {
   JtPreferences.initialize("path/path");
-  final args = JtPreferences.getInstance();
-  await args.setString('token', '123');
-  await args.setInt('age', 18);
-  await args.setDouble('weight', 18.5);
-  await args.setBool('isFree', false);
+  final preferences = JtPreferences.getInstance();
+  await preferences.setString('token', '123');
+  await preferences.setInt('age', 18);
+  await preferences.setDouble('weight', 18.5);
+  await preferences.setBool('isFree', false);
 
-  args.listen(key: 'token').listen((event) {
+  preferences.listen(key: 'token').listen((event) {
     print("key $event updated");
   });
 
-  args.listen().listen((event) {
+  preferences.listen().listen((event) {
     print("key $event updated");
   });
 }
