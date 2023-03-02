@@ -69,4 +69,14 @@ class JtPreferences extends Preferences {
   Stream<dynamic> listen({String? key}) {
     return _manager.listen(key: key);
   }
+
+  @override
+  Future<bool> contains(String key) {
+    return _manager.contains(key);
+  }
+
+  @override
+  Future<bool> remove(String key) {
+    return _manager.remove(key);
+  }
 }

@@ -37,5 +37,18 @@ void main() {
         ),
       );
     });
+
+    test('test contains key', () async {
+      await preferences.setString('Key', "KeyValue");
+      expect((await preferences.contains('Key')), true);
+    });
+
+    test('test remove key', () async {
+      await preferences.setString('KeyTestForRemove', "KeyValue");
+      expect((await preferences.contains('KeyTestForRemove')), true);
+      final res = await preferences.remove('KeyTestForRemove');
+      expect(res, true);
+      expect((await preferences.contains('KeyTestForRemove')), false);
+    });
   });
 }

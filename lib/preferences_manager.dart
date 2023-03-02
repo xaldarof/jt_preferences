@@ -102,4 +102,16 @@ class PreferencesManagerImpl extends PreferencesManager {
       }
     }
   }
+
+  @override
+  Future<bool> contains(String key) async {
+    return (await read()).containsKey(key);
+  }
+
+  @override
+  Future<bool> remove(String key) async {
+    final map = await read();
+    map.remove(key);
+    return await write(WriteData(map: map, updatedKey: key));
+  }
 }

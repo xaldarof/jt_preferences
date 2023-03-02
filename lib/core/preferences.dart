@@ -10,6 +10,8 @@ abstract class Set {
   Future<bool> setDouble(String key, double? value);
 
   Future<bool> setBool(String key, bool? value);
+
+  Future<bool> remove(String key);
 }
 
 abstract class Get {
@@ -20,6 +22,8 @@ abstract class Get {
   Future<double?> getDouble(String key);
 
   Future<bool?> getBoolean(String key);
+
+  Future<bool> contains(String key);
 }
 
 abstract class Listener<T> {
