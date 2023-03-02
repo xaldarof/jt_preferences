@@ -16,7 +16,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    
       - uses: actions/checkout@v3
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
 
       # Note: This workflow uses the latest stable version of the Dart SDK.
       # You can specify other versions if desired, see documentation here:
@@ -25,7 +30,7 @@ jobs:
       - uses: dart-lang/setup-dart@9a04e6d73cca37bd455e0608d7e5092f881fd603
 
       - name: Install dependencies
-        run: dart pub get
+        run: flutter pub get
 
       # Uncomment this step to verify the use of 'dart format' on each commit.
       # - name: Verify formatting
