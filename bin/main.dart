@@ -8,6 +8,10 @@ void main(List<String> args) async {
   await preferences.setDouble('weight', 18.5);
   await preferences.setBool('isFree', false);
 
+  await preferences.contains('isFree'); //true
+  await preferences.remove('isFree');
+  await preferences.contains('isFree'); //false
+
   preferences.listen(key: 'token').listen((event) {
     print("key $event updated");
   });
