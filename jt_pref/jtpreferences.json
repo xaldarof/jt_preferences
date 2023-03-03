@@ -1,1 +1,7 @@
-{"KeyStringTest":"ValueStringTest","KeyIntTest":8,"KeyDoubleTest":3.14,"KeyBooleanTest":true,"KeySingleKeyListen":"Hi","Key":"KeyValue"}
+{
+  "KeyStringTest": "ValueStringTest",
+  "KeyDoubleTest": 3.14,
+  "KeyBooleanTest": true,
+  "KeySingleKeyListen": "Hi",
+  "Key": "KeyValue"
+}
