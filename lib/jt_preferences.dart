@@ -17,12 +17,12 @@ class JtPreferences extends Preferences {
   }
 
   static initialize(String path) {
+    _path = path;
     final dirProvider = DirectoryProviderImpl();
     final mapper = DataMapper();
     final fileManager = FileManagerImpl(
         directoryProvider: dirProvider, mapper: mapper, rootPath: _path);
     _manager = PreferencesManagerImpl(manager: fileManager);
-    _path = path;
   }
 
   @override
