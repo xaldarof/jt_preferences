@@ -55,6 +55,9 @@ class PreferencesManagerImpl extends PreferencesManager {
 
   @override
   Future<bool> write(WriteData data) async {
+    if (data.map[data.updatedKey] == null) {
+      data.map.remove(data.updatedKey);
+    }
     await _manager.write(data.map);
     _keyListener.add(data.updatedKey);
     return true;

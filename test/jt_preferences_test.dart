@@ -50,5 +50,12 @@ void main() {
       expect(res, true);
       expect((await preferences.contains('KeyTestForRemove')), false);
     });
+
+    test('test remove key if value is null', () async {
+      await preferences.setString('KeyTest1', "KeyValue1");
+      expect((await preferences.contains('KeyTest1')), true);
+      await preferences.setString('KeyTest1', null);
+      expect((await preferences.contains('KeyTest1')), false);
+    });
   });
 }
