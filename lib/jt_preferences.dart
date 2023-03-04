@@ -2,6 +2,7 @@ import 'package:jt_preferences/adapter/data_mapper.dart';
 import 'package:jt_preferences/core/preferences.dart';
 import 'package:jt_preferences/preferences_manager.dart';
 
+import 'core/writable.dart';
 import 'file/dir/directory_provider_impl.dart';
 import 'file/file_manager_impl.dart';
 
@@ -78,5 +79,26 @@ class JtPreferences extends Preferences {
   @override
   Future<bool> remove(String key) {
     return _manager.remove(key);
+  }
+
+  @override
+  Future<bool> clear() {
+    return _manager.clear();
+  }
+
+  @override
+  Future<Map<String, dynamic>> getAll() {
+    return _manager.getAll();
+  }
+
+  @override
+  Future<bool> saveObject(Writable data) {
+    return _manager.saveObject(data);
+  }
+
+  @override
+  Future<T?> getObject<T>(
+      String key, T Function(Map<String, dynamic> map) parse) {
+    return _manager.getObject(key, parse);
   }
 }

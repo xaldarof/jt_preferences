@@ -1,10 +1,12 @@
 import 'dart:io';
 
+import 'package:jt_preferences/fake/fake_user.dart';
 import 'package:jt_preferences/jt_preferences.dart';
 import 'package:test/test.dart';
 
 void main() {
   JtPreferences.initialize(Directory.current.path);
+  //
   final preferences = JtPreferences.getInstance();
   group('test save values', () {
     test('set string test', () async {
@@ -56,6 +58,27 @@ void main() {
       expect((await preferences.contains('KeyTest1')), true);
       await preferences.setString('KeyTest1', null);
       expect((await preferences.contains('KeyTest1')), false);
+    });
+
+    test('test clear all data', () async {
+      await preferences.setString('KeyTest1', "KeyValue1");
+      await preferences.clear();
+      expect((await preferences.getAll()).isEmpty, true);
+    });
+
+    test('test get all', () async {
+      await preferences.clear();
+      await preferences.setString('KeyTest1', "KeyValue1");
+      expect((await preferences.getAll()).values.isNotEmpty, true);
+      expect((await preferences.getAll()).values.toList()[0], 'KeyValue1');
+    });
+
+    test('test save object', () async {
+      await preferences.saveObject(User(name: "Tom", age: 19));
+
+      final object =
+          (await preferences.getObject('Tom', (map) => User.fromJson(map)));
+      expect(object?.age, 19);
     });
   });
 }

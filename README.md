@@ -13,13 +13,57 @@ void main(List<String> args) async {
   await preferences.remove('isFree');
   await preferences.contains('isFree'); //false
 
+  //Save writable object
+  await preferences.saveObject(User(name: 'averageName', age: 12));
+
+  //get writable object
+  final object =
+      await preferences.getObject('averageName', (map) => User.fromJson(map));
+  print(object?.name);
+  print(object?.age);
+
+  //listen only one key
   preferences.listen(key: 'token').listen((event) {
     print("key $event updated");
   });
 
+  //listen all changes
   preferences.listen().listen((event) {
     print("key $event updated");
   });
+}
+```
+
+Here is example Writable object:
+
+```dart
+class User extends Writable {
+  final String name;
+  final int age;
+
+  @override
+  factory User.fromJson(Map<String, dynamic> map) {
+    return User(name: map['name'], age: map['age']);
+  }
+
+  @override
+  OnConflictStrategy? get onConflictStrategy => OnConflictStrategy.update;
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      "name": name,
+      "age": age,
+    };
+  }
+
+  User({
+    required this.name,
+    required this.age,
+  });
+
+  @override
+  get key => name;
 }
 ```
 

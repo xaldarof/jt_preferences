@@ -1,3 +1,4 @@
+import 'package:jt_preferences/fake/fake_user.dart';
 import 'package:jt_preferences/jt_preferences.dart';
 
 void main(List<String> args) async {
@@ -12,10 +13,21 @@ void main(List<String> args) async {
   await preferences.remove('isFree');
   await preferences.contains('isFree'); //false
 
+  //Save writable object
+  await preferences.saveObject(User(name: 'averageName', age: 12));
+
+  //get writable object
+  final object =
+      await preferences.getObject('averageName', (map) => User.fromJson(map));
+  print(object?.name);
+  print(object?.age);
+
+  //listen only one key
   preferences.listen(key: 'token').listen((event) {
     print("key $event updated");
   });
 
+  //listen all changes
   preferences.listen().listen((event) {
     print("key $event updated");
   });

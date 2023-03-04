@@ -1,4 +1,6 @@
-abstract class Preferences implements Set, Get, Listener {
+import 'package:jt_preferences/core/writable.dart';
+
+abstract class Preferences implements Set, Get, Clear, Listener {
   //
 }
 
@@ -12,6 +14,12 @@ abstract class Set {
   Future<bool> setBool(String key, bool? value);
 
   Future<bool> remove(String key);
+
+  Future<bool> saveObject(Writable data);
+}
+
+abstract class Clear {
+  Future<bool> clear();
 }
 
 abstract class Get {
@@ -24,6 +32,11 @@ abstract class Get {
   Future<bool?> getBoolean(String key);
 
   Future<bool> contains(String key);
+
+  Future<Map<String, dynamic>> getAll();
+
+  Future<T?> getObject<T>(
+      String key, T Function(Map<String, dynamic> map) parse);
 }
 
 abstract class Listener<T> {

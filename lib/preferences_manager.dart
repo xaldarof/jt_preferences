@@ -1,22 +1,18 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:jt_preferences/core/preferences.dart';
 import 'package:jt_preferences/core/read.dart';
 import 'package:jt_preferences/core/write.dart';
 import 'package:jt_preferences/file/file_manager.dart';
 
-class WriteData {
-  final Map<String, dynamic> map;
-  final String updatedKey;
-
-  const WriteData({
-    required this.map,
-    required this.updatedKey,
-  });
-}
+import 'core/writable.dart';
+import 'models/write_data.dart';
 
 abstract class PreferencesManager extends Preferences
-    implements Read<Map<String, dynamic>>, Write<WriteData> {}
+    implements Read<Map<String, dynamic>>, Write<WriteData> {
+  Future<bool> writeByCheckConflicts(Writable object);
+}
 
 class PreferencesManagerImpl extends PreferencesManager {
   final FileManager _manager;
@@ -116,5 +112,58 @@ class PreferencesManagerImpl extends PreferencesManager {
     final map = await read();
     map.remove(key);
     return await write(WriteData(map: map, updatedKey: key));
+  }
+
+  @override
+  Future<bool> clear() async {
+    final map = await read();
+    map.clear();
+    return write(WriteData(map: map, updatedKey: null));
+  }
+
+  @override
+  Future<Map<String, dynamic>> getAll() async {
+    return read();
+  }
+
+  @override
+  Future<bool> saveObject(Writable data) async {
+    final map = await read();
+    map[data.key] = data;
+    return writeByCheckConflicts(data);
+  }
+
+  @override
+  Future<bool> writeByCheckConflicts(Writable object) async {
+    final map = await read();
+    if (map.containsKey(object.key)) {
+      if (object.onConflictStrategy == OnConflictStrategy.remove) {
+        map.remove(object.key);
+        return write(WriteData(map: map, updatedKey: object.key));
+      }
+      if (object.onConflictStrategy == OnConflictStrategy.update) {
+        map[object.key] = object.toJson();
+        return write(WriteData(map: map, updatedKey: object.key));
+      }
+      if (object.onConflictStrategy == OnConflictStrategy.ignore) {
+        //
+        return true;
+      }
+    } else {
+      map[object.key] = object.toJson();
+      return write(WriteData(map: map, updatedKey: object.key));
+    }
+    return false;
+  }
+
+  @override
+  Future<T?> getObject<T>(
+      String key, T Function(Map<String, dynamic> map) parse) async {
+    final map = await read();
+    if (map.containsKey(key)) {
+      return parse((map[key] as Map<String, dynamic>));
+    } else {
+      return null;
+    }
   }
 }
