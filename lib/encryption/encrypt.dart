@@ -1,5 +1,5 @@
-import 'package:jt_preferences/encryption/encryption.dart';
+import 'package:encrypt/encrypt.dart';
 
-abstract class Encrypt extends Encryption {
-  Future<String> encrypt(String data);
+abstract class Encrypt {
+  Encrypted encrypt(String key, String plainText, {AESMode? mode});
 }
