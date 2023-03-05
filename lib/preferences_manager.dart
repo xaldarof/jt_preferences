@@ -16,7 +16,8 @@ abstract class PreferencesManager extends Preferences
 
 class PreferencesManagerImpl extends PreferencesManager {
   final FileManager _manager;
-  final StreamController _keyListener = StreamController();
+  final StreamController<String?> _keyListener =
+      StreamController<String?>.broadcast();
 
   @override
   Future<int?> getInt(String key) async {

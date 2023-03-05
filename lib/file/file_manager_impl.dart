@@ -21,7 +21,6 @@ class FileManagerImpl extends FileManager {
   @override
   Future<bool> write(Map<String, dynamic> data) async {
     final path = await _directoryProvider.getFilesDir(_rootPath);
-    print(path);
     final file = File(path);
     await file.writeAsString(_mapper.encode(data), mode: FileMode.write);
     return true;

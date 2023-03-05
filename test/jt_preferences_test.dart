@@ -30,7 +30,6 @@ void main() {
     });
 
     test('test listen key', () async {
-      await preferences.setString('KeySingleKeyListen', "Hi");
       preferences.listen(key: 'KeySingleKeyListen').listen(
         expectAsync1(
           (event) {
@@ -38,6 +37,7 @@ void main() {
           },
         ),
       );
+      await preferences.setString('KeySingleKeyListen', "Hi");
     });
 
     test('test contains key', () async {

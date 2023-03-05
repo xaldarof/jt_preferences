@@ -3,7 +3,19 @@ Here is an example:
 ```
 void main(List<String> args) async {
   JtPreferences.initialize("path/path");
+
   final preferences = JtPreferences.getInstance();
+
+  //listen only one key
+  preferences.listen(key: 'averageName').listen((event) {
+    print("key $event updated");
+  });
+
+  //listen all changes
+  preferences.listen().listen((event) {
+    print("key $event updated");
+  });
+
   await preferences.setString('token', '123');
   await preferences.setInt('age', 18);
   await preferences.setDouble('weight', 18.5);
@@ -21,16 +33,6 @@ void main(List<String> args) async {
       await preferences.getObject('averageName', (map) => User.fromJson(map));
   print(object?.name);
   print(object?.age);
-
-  //listen only one key
-  preferences.listen(key: 'token').listen((event) {
-    print("key $event updated");
-  });
-
-  //listen all changes
-  preferences.listen().listen((event) {
-    print("key $event updated");
-  });
 }
 ```
 
