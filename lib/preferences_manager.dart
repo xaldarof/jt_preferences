@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:jt_preferences/core/preferences.dart';
 import 'package:jt_preferences/core/read.dart';

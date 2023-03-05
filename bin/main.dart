@@ -29,8 +29,7 @@ void main(List<String> args) async {
   await preferences.saveObject(User(name: 'averageName', age: 12));
 
   //get writable object
-  final object =
-      await preferences.getObject('averageName', (map) => User.fromJson(map));
+  final object = await preferences.getObject('averageName', (map) => User.fromJson(map));
   print(object?.name);
   print(object?.age);
 }
