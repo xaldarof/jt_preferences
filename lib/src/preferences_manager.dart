@@ -1,12 +1,10 @@
 import 'dart:async';
-
-import 'package:jt_preferences/core/preferences.dart';
-import 'package:jt_preferences/core/read.dart';
-import 'package:jt_preferences/core/write.dart';
-import 'package:jt_preferences/file/file_manager.dart';
-
-import 'core/writable.dart';
-import 'models/write_data.dart';
+import 'package:jt_preferences/src/core/preferences.dart';
+import 'package:jt_preferences/src/core/read.dart';
+import 'package:jt_preferences/src/core/writable.dart';
+import 'package:jt_preferences/src/core/write.dart';
+import 'package:jt_preferences/src/file/file_manager.dart';
+import 'package:jt_preferences/src/models/write_data.dart';
 
 abstract class PreferencesManager extends Preferences
     implements Read<Map<String, dynamic>>, Write<WriteData> {

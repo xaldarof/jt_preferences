@@ -1,7 +1,8 @@
 import 'dart:convert';
 
-import 'package:jt_preferences/adapter/decoder.dart';
-import 'package:jt_preferences/adapter/encoder.dart';
+import 'decoder.dart';
+import 'encoder.dart';
+
 
 abstract class Mapper implements Encoder, Decoder {}
 

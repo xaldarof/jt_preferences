@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:jt_preferences/adapter/data_mapper.dart';
-import 'package:jt_preferences/file/dir/directory_provider.dart';
 
+import '../adapter/data_mapper.dart';
+import 'dir/directory_provider.dart';
 import 'file_manager.dart';
 
 class FileManagerImpl extends FileManager {

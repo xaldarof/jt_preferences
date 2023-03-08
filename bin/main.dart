@@ -1,5 +1,5 @@
-import 'package:jt_preferences/fake/fake_user.dart';
-import 'package:jt_preferences/jt_preferences.dart';
+import 'package:jt_preferences/src/jt_preferences.dart';
+import 'package:jt_preferences/src/fake/fake_user.dart';
 
 void main(List<String> args) async {
   JtPreferences.initialize("path/path");
@@ -29,7 +29,8 @@ void main(List<String> args) async {
   await preferences.saveObject(User(name: 'averageName', age: 12));
 
   //get writable object
-  final object = await preferences.getObject('averageName', (map) => User.fromJson(map));
+  final object =
+      await preferences.getObject('averageName', (map) => User.fromJson(map));
   print(object?.name);
   print(object?.age);
 }

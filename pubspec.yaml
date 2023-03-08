@@ -1,6 +1,6 @@
 name: jt_preferences
 description: Json based key-value storage with AES encryption support. Supported data types are `int`, `double`, `bool`, `String` and `Writable object`.
-version: 3.0.4
+version: 3.0.11
 homepage: "https://github.com/xaldarof/jt_preferences"
 # repository: https://github.com/my_org/my_repo
 
@@ -14,3 +14,4 @@ dev_dependencies:
 
 dependencies:
   encrypt: ^5.0.1
+  get_it: ^7.2.0

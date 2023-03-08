@@ -1,29 +1,22 @@
-import 'package:jt_preferences/adapter/data_mapper.dart';
-import 'package:jt_preferences/core/preferences.dart';
-import 'package:jt_preferences/preferences_manager.dart';
+import 'package:jt_preferences/src/core/preferences.dart';
+import 'package:jt_preferences/src/core/writable.dart';
+import 'package:jt_preferences/src/di/lib_di.dart';
 
-import 'core/writable.dart';
-import 'file/dir/directory_provider_impl.dart';
-import 'file/file_manager_impl.dart';
+import 'preferences_manager.dart';
 
 class JtPreferences extends Preferences {
   JtPreferences._();
 
   static late final PreferencesManager _manager;
   static final JtPreferences _instance = JtPreferences._();
-  static late String _path;
 
   static JtPreferences getInstance() {
     return _instance;
   }
 
   static initialize(String path) {
-    _path = path;
-    final dirProvider = DirectoryProviderImpl();
-    final mapper = DataMapper();
-    final fileManager = FileManagerImpl(
-        directoryProvider: dirProvider, mapper: mapper, rootPath: _path);
-    _manager = PreferencesManagerImpl(manager: fileManager);
+    initDependencies(path);
+    _manager = injector.get();
   }
 
   @override

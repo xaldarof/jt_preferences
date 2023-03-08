@@ -1,4 +1,5 @@
-import 'package:jt_preferences/core/writable.dart';
+
+import '../core/writable.dart';
 
 class User extends Writable {
   final String name;

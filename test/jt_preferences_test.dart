@@ -1,12 +1,12 @@
 import 'dart:io';
 
-import 'package:jt_preferences/fake/fake_user.dart';
-import 'package:jt_preferences/jt_preferences.dart';
+import 'package:jt_preferences/src/jt_preferences.dart';
+import 'package:jt_preferences/src/fake/fake_user.dart';
+
 import 'package:test/test.dart';
 
 void main() {
   JtPreferences.initialize(Directory.current.path);
-  //
   final preferences = JtPreferences.getInstance();
   group('test save values', () {
     test('set string test', () async {

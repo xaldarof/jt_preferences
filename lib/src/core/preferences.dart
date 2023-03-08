@@ -1,4 +1,5 @@
-import 'package:jt_preferences/core/writable.dart';
+
+import 'writable.dart';
 
 abstract class Preferences implements Set, Get, Clear, Listener {
   //
