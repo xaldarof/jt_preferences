@@ -4,11 +4,21 @@
 
 Supported data types are `int`, `double`, `bool`, `String` and `Writable object`.
 
+
+
 ## Usage
 To use this plugin, add `jt_preferences` as a [dependency in your pubspec.yaml file](https://flutter.dev/docs/development/platform-integration/platform-channels).
 
 ### Examples
 Here are small examples that show you how to use the package.
+
+
+### Initialize
+```dart
+void main(List<String> args) async {
+  JtPreferences.initialize("path/path");
+}
+```
 
 #### Write data
 ```dart
@@ -28,6 +38,40 @@ await preferences.setString('action', 'Start');
 await preferences.saveObject(User(name: 'averageName', age: 12));
 
 ```
+### Example User Writable object
+```dart
+class User extends Writable {
+  final String name;
+  final int age;
+
+  @override
+  factory User.fromJson(Map<String, dynamic> map) {
+    return User(name: map['name'], age: map['age']);
+  }
+
+  @override
+  OnConflictStrategy? get onConflictStrategy => OnConflictStrategy.update;
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      "name": name,
+      "age": age,
+    };
+  }
+
+  User({
+    required this.name,
+    required this.age,
+  });
+
+  @override
+  get key => name;
+}
+
+```
+
+
 
 #### Read data
 ```dart
@@ -65,45 +109,3 @@ preferences.listen(key: 'counter').listen((event) {
 // Remove data for the 'counter' key.
 final success = await preferences.remove('counter');
 ```
-
-### Storage location
-```dart
-void main(List<String> args) async {
-  JtPreferences.initialize("path/path");
-}
-```
-
-
-### Example User Writable object
-```dart
-class User extends Writable {
-  final String name;
-  final int age;
-
-  @override
-  factory User.fromJson(Map<String, dynamic> map) {
-    return User(name: map['name'], age: map['age']);
-  }
-
-  @override
-  OnConflictStrategy? get onConflictStrategy => OnConflictStrategy.update;
-
-  @override
-  Map<String, dynamic> toJson() {
-    return {
-      "name": name,
-      "age": age,
-    };
-  }
-
-  User({
-    required this.name,
-    required this.age,
-  });
-
-  @override
-  get key => name;
-}
-
-```
-
