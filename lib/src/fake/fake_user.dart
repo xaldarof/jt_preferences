@@ -1,4 +1,3 @@
-
 import '../core/writable.dart';
 
 class User extends Writable {
@@ -7,11 +6,11 @@ class User extends Writable {
 
   @override
   factory User.fromJson(Map<String, dynamic> map) {
-    return User(name: map['name'], age: map['age']);
+    return User(
+      name: map['name'],
+      age: map['age'],
+    );
   }
-
-  @override
-  OnConflictStrategy? get onConflictStrategy => OnConflictStrategy.update;
 
   @override
   Map<String, dynamic> toJson() {
@@ -27,5 +26,5 @@ class User extends Writable {
   });
 
   @override
-  get key => name;
+  dynamic get key => name;
 }

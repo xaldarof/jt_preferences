@@ -1,5 +1,5 @@
 abstract class Writable {
-  dynamic key;
+  dynamic get key;
 
   OnConflictStrategy? onConflictStrategy = OnConflictStrategy.update;
 

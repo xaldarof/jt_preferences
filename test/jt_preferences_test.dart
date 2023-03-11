@@ -5,9 +5,10 @@ import 'package:jt_preferences/src/fake/fake_user.dart';
 
 import 'package:test/test.dart';
 
-void main() {
+void main() async {
   JtPreferences.initialize(Directory.current.path);
   final preferences = JtPreferences.getInstance();
+  await preferences.clear();
   group('test save values', () {
     test('set string test', () async {
       await preferences.setString('KeyStringTest', 'ValueStringTest');
