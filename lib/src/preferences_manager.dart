@@ -126,8 +126,6 @@ class PreferencesManagerImpl extends PreferencesManager {
 
   @override
   Future<bool> saveObject(Writable data) async {
-    final map = await read();
-    map[data.key] = data;
     return writeByCheckConflicts(data);
   }
 

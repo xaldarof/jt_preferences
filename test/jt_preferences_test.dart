@@ -78,7 +78,7 @@ void main() async {
       await preferences.saveObject(User(name: "Tom", age: 19));
 
       final object =
-          (await preferences.getObject('Tom', (map) => User.fromJson(map)));
+          (await preferences.getObject('19', (map) => User.fromJson(map)));
       expect(object?.age, 19);
     });
   });

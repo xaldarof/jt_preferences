@@ -26,5 +26,5 @@ class User extends Writable {
   });
 
   @override
-  dynamic get key => name;
+  String get key => age.toString();
 }
