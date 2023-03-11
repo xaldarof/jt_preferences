@@ -13,8 +13,8 @@ abstract class PreferencesManager extends Preferences
 
 class PreferencesManagerImpl extends PreferencesManager {
   final FileManager _manager;
-  final StreamController<String?> _keyListener =
-      StreamController<String?>.broadcast();
+  final StreamController<String> _keyListener =
+      StreamController<String>.broadcast();
 
   @override
   Future<int?> getInt(String key) async {
@@ -88,7 +88,7 @@ class PreferencesManagerImpl extends PreferencesManager {
   }
 
   @override
-  Stream<dynamic> listen({String? key}) async* {
+  Stream<String> listen({String? key}) async* {
     await for (final event in _keyListener.stream) {
       if (key != null) {
         if (event == key) {
@@ -116,7 +116,7 @@ class PreferencesManagerImpl extends PreferencesManager {
   Future<bool> clear() async {
     final map = await read();
     map.clear();
-    return write(WriteData(map: map, updatedKey: null));
+    return write(WriteData(map: map, updatedKey: 'null'));
   }
 
   @override

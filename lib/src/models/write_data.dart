@@ -1,6 +1,6 @@
 class WriteData {
   final Map<String, dynamic> map;
-  final String? updatedKey;
+  final String updatedKey;
 
   const WriteData({
     required this.map,

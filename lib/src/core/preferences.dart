@@ -41,5 +41,5 @@ abstract class Get {
 }
 
 abstract class Listener<T> {
-  Stream<dynamic> listen({String? key});
+  Stream<String> listen({String? key});
 }
