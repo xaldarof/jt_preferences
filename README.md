@@ -66,7 +66,7 @@ class User extends Writable {
   });
 
   @override
-  get key => name;
+  String key => name;
 }
 
 ```
