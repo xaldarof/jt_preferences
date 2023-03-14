@@ -15,7 +15,7 @@ Here are small examples that show you how to use the package.
 
 ### Initialize
 ```dart
-void main(List<String> args) async {
+void main(List<String> args) 
   JtPreferences.initialize("path/path");
 }
 ```
