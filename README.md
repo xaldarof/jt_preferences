@@ -24,52 +24,26 @@ void main(List<String> args) async {
 }
 ```
 
-#### Write data
 
+#### Write data
 ```dart
 // Obtain shared preferences.
-final preferences = await
-JtPreferences.getInstance();
+final preferences = await JtPreferences.getInstance();
 
 // Save an integer value to 'counter' key.
-await
-preferences.setInt('
-counter',
-10
-);
+await preferences.setInt('counter', 10);
 // Save an boolean value to 'repeat' key.
-await
-preferences.setBool('
-repeat',
-true
-);
+await preferences.setBool('repeat', true);
 // Save an double value to 'decimal' key.
-await
-preferences.setDouble('
-decimal',
-1.5
-);
+await preferences.setDouble('decimal', 1.5);
 // Save an String value to 'action' key.
-await
-preferences.setString('
-action',
-'
-Start');
+await preferences.setString('action', 'Start');
 
 //Save writable object
-await
-preferences.saveObject(User
-(
-name: '
-averageName',
-age: 12
-)
-);
+await preferences.saveObject(User(name: 'averageName', age: 12));
 
 ```
-
 ### Example User Writable object
-
 ```dart
 class User extends Writable {
   final String name;
@@ -97,19 +71,14 @@ class User extends Writable {
   });
 
   @override
-  String key
-
-  =>
-
-  name
-
-  ;
+  String key => name;
 }
 
 ```
 
-#### Read data
 
+
+#### Read data
 ```dart
 // Try reading data from the 'counter' key. If it doesn't exist, returns null.
 final int? counter = preferences.getInt('counter');
@@ -120,48 +89,28 @@ final double? decimal = preferences.getDouble('decimal');
 // Try reading data from the 'action' key. If it doesn't exist, returns null.
 final String? action = preferences.getString('action');
 
-final object = await
-preferences.getObject('
-averageName',
-(
-map) =>
-User.fromJson(map));
-print
-(
-object?.name);
-print
-(
-object?.age);
+final object = await preferences.getObject('averageName', (map) => User.fromJson(map));
+print(object?.name);
+print(object?.age);
 
 ```
 
 ### Listen changes
-
 ```dart
 //listen all changes
-preferences.listen()
-.
-listen
-((event) {
-print("key $event updated");
+preferences.listen().listen((event) {
+  print("key $event updated");
 });
 
 //listen only specific key
-preferences.listen(key: '
-counter')
-.
-listen
-((event) {
-print("key $event updated");
+preferences.listen(key: 'counter').listen((event) {
+   print("key $event updated");
 });
 
 ```
 
 #### Remove an entry
-
 ```dart
 // Remove data for the 'counter' key.
-final success = await
-preferences.remove('
-counter');
+final success = await preferences.remove('counter');
 ```
