@@ -14,8 +14,8 @@ class JtPreferences extends Preferences {
     return _instance;
   }
 
-  static initialize(String path) {
-    initDependencies(path);
+  static initialize(String path, {String? encryptionKey}) {
+    initDependencies(path, encryptionKey: encryptionKey);
     _manager = injector.get();
   }
 

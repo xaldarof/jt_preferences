@@ -142,7 +142,6 @@ class PreferencesManagerImpl extends PreferencesManager {
         return write(WriteData(map: map, updatedKey: object.key));
       }
       if (object.onConflictStrategy == OnConflictStrategy.ignore) {
-        //
         return true;
       }
     } else {
