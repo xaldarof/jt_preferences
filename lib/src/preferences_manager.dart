@@ -166,4 +166,19 @@ class PreferencesManagerImpl extends PreferencesManager {
   Future<List<String>> getKeys() async {
     return (await read()).keys.toList();
   }
+
+  @override
+  void startTemporaryMode() {
+    _manager.startTemporaryMode();
+  }
+
+  @override
+  void stopTemporaryMode() {
+    _manager.stopTemporaryMode();
+  }
+
+  @override
+  Future<bool> sync() {
+    return _manager.sync();
+  }
 }
