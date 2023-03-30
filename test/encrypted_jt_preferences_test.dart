@@ -7,7 +7,7 @@ import 'package:test/test.dart';
 
 void main() async {
   JtPreferences.initialize(Directory.current.path,
-      encryptionKey: '16 length encryption key');
+      encryptionKey: '16 length encryp');
   final preferences = JtPreferences.getInstance();
   await preferences.clear();
   group('test save values', () {
