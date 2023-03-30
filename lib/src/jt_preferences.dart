@@ -99,4 +99,19 @@ class JtPreferences extends Preferences {
   Future<List<String>> getKeys() {
     return _manager.getKeys();
   }
+
+  @override
+  void startTemporaryMode() {
+    return _manager.startTemporaryMode();
+  }
+
+  @override
+  void stopTemporaryMode() {
+    return _manager.stopTemporaryMode();
+  }
+
+  @override
+  Future<bool> sync() {
+    return _manager.sync();
+  }
 }

@@ -6,4 +6,9 @@ class WriteData {
     required this.map,
     required this.updatedKey,
   });
+
+  @override
+  String toString() {
+    return 'WriteData{map: $map, updatedKey: $updatedKey}';
+  }
 }

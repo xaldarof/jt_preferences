@@ -1,6 +1,8 @@
+import 'package:jt_preferences/src/core/mode_manager.dart';
+
 import 'writable.dart';
 
-abstract class Preferences implements Set, Get, Clear, Listener {
+abstract class Preferences implements Set, Get, Clear, Listener, ModeManager {
   //
 }
 
