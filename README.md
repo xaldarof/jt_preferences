@@ -89,6 +89,8 @@ final double? decimal = preferences.getDouble('decimal');
 // Try reading data from the 'action' key. If it doesn't exist, returns null.
 final String? action = preferences.getString('action');
 
+final List<String>? keys = preferences.getKeys();
+
 final object = await preferences.getObject('averageName', (map) => User.fromJson(map));
 print(object?.name);
 print(object?.age);
