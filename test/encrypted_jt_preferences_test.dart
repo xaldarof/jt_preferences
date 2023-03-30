@@ -82,5 +82,11 @@ void main() async {
           (await preferences.getObject('19', (map) => User.fromJson(map)));
       expect(object?.age, 19);
     });
+
+    test('test get keys', () async {
+      expect((await preferences.getKeys()).isNotEmpty, true);
+      await preferences.clear();
+      expect((await preferences.getKeys()).isEmpty, true);
+    });
   });
 }

@@ -161,4 +161,9 @@ class PreferencesManagerImpl extends PreferencesManager {
       return null;
     }
   }
+
+  @override
+  Future<List<String>> getKeys() async {
+    return (await read()).keys.toList();
+  }
 }

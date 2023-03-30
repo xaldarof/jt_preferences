@@ -1,4 +1,3 @@
-
 import 'writable.dart';
 
 abstract class Preferences implements Set, Get, Clear, Listener {
@@ -35,6 +34,8 @@ abstract class Get {
   Future<bool> contains(String key);
 
   Future<Map<String, dynamic>> getAll();
+
+  Future<List<String>> getKeys();
 
   Future<T?> getObject<T>(
       String key, T Function(Map<String, dynamic> map) parse);

@@ -94,4 +94,9 @@ class JtPreferences extends Preferences {
       String key, T Function(Map<String, dynamic> map) parse) {
     return _manager.getObject(key, parse);
   }
+
+  @override
+  Future<List<String>> getKeys() {
+    return _manager.getKeys();
+  }
 }
