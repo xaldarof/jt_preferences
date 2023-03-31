@@ -33,4 +33,13 @@ void main(List<String> args) async {
       await preferences.getObject('averageName', (map) => User.fromJson(map));
   print(object?.name);
   print(object?.age);
+
+  preferences.startTemporaryMode();
+
+  preferences.setString('key', 'value');
+  preferences.setString('key1', 'value1');
+
+  preferences.stopTemporaryMode();
+
+  preferences.sync();
 }

@@ -111,8 +111,30 @@ preferences.listen(key: 'counter').listen((event) {
 
 ```
 
+
 #### Remove an entry
 ```dart
 // Remove data for the 'counter' key.
 final success = await preferences.remove('counter');
+```
+
+
+### Temporary mode
+
+
+`
+About temporary mode
+
+Temporary mode is when data is stored in a Map data structure until you manually synchronize it, which helps you avoid excessive memory writes. It is better to save 10 data items at once than to write them to memory every time.
+`
+```dart
+  preferences.startTemporaryMode();
+
+  await preferences.setString('key', 'value');
+  await preferences.setString('key1', 'value1');
+
+  await preferences.stopTemporaryMode();
+
+  await preferences.sync();
+  
 ```
