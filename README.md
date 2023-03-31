@@ -127,8 +127,12 @@ final success = await preferences.remove('counter');
 ```dart
   preferences.startTemporaryMode();
 
-  await preferences.setString('key', 'value');
   await preferences.setString('key1', 'value1');
+  await preferences.setString('key2', 'value2');
+  await preferences.setString('key3', 'value3');
+  await preferences.setString('key4', 'value4');
+  await preferences.setString('key5', 'value5');
+  await preferences.setString('key6', 'value6');
 
   await preferences.stopTemporaryMode();
 
