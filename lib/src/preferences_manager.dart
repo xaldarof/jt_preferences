@@ -181,4 +181,7 @@ class PreferencesManagerImpl extends PreferencesManager {
   Future<bool> sync() {
     return _manager.sync();
   }
+
+  @override
+  bool get isTemporaryModeEnabled => _manager.isTemporaryModeEnabled;
 }

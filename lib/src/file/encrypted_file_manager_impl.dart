@@ -72,4 +72,7 @@ class EncryptedFileManager extends FileManager {
   Future<bool> sync() async {
     return await save(_temp);
   }
+
+  @override
+  bool get isTemporaryModeEnabled => _saveTemporary;
 }

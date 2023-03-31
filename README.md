@@ -122,7 +122,7 @@ final success = await preferences.remove('counter');
 ### Temporary mode
 
 
-`Temporary mode is when data is stored in a Map data structure until you manually synchronize it, which helps you avoid excessive memory writes. It is better to save 10 data items at once than to write them to memory every time.`
+`Temporary mode is when data is stored in a Map data structure until you manually synchronize it, which helps you avoid excessive memory writes. Use this when you are unsure if you need the data or want to filter it before saving.`
 
 ```dart
   preferences.startTemporaryMode();
@@ -135,6 +135,7 @@ final success = await preferences.remove('counter');
   await preferences.setString('key6', 'value6');
 
   await preferences.stopTemporaryMode();
+  final bool = preferences.isTemporaryModeEnabled;
 
   await preferences.sync();
   

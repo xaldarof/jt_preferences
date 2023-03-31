@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:jt_preferences/src/core/preferences.dart';
 import 'package:jt_preferences/src/core/writable.dart';
 import 'package:jt_preferences/src/di/lib_di.dart';
@@ -114,4 +116,7 @@ class JtPreferences extends Preferences {
   Future<bool> sync() {
     return _manager.sync();
   }
+
+  @override
+  bool get isTemporaryModeEnabled => _manager.isTemporaryModeEnabled;
 }

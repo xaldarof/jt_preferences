@@ -4,4 +4,6 @@ abstract class ModeManager {
   void stopTemporaryMode();
 
   Future<bool> sync();
+
+  bool get isTemporaryModeEnabled;
 }

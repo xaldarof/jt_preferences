@@ -40,6 +40,8 @@ void main(List<String> args) async {
   preferences.setString('key1', 'value1');
 
   preferences.stopTemporaryMode();
+  final bool = preferences.isTemporaryModeEnabled;
+
 
   preferences.sync();
 }

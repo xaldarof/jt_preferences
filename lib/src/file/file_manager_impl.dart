@@ -54,7 +54,10 @@ class FileManagerImpl extends FileManager {
 
   @override
   Future<bool> sync() async {
-    final res = await save(_temp);
+    _saveTemporary = false;
+    final cache = await read();
+    cache.addAll(_temp);
+    final res = await save(cache);
     if (res) {
       _temp.clear();
     }
@@ -68,4 +71,7 @@ class FileManagerImpl extends FileManager {
     await file.writeAsString(_mapper.encode(map), mode: FileMode.write);
     return true;
   }
+
+  @override
+  bool get isTemporaryModeEnabled => _saveTemporary;
 }
