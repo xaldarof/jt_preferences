@@ -68,7 +68,7 @@ class User extends Writable {
   User({
     required this.name,
     required this.age,
-  });
+`  });
 
   @override
   String key => name;
@@ -122,11 +122,10 @@ final success = await preferences.remove('counter');
 ### Temporary mode
 
 
-`
-About temporary mode
 
-Temporary mode is when data is stored in a Map data structure until you manually synchronize it, which helps you avoid excessive memory writes. It is better to save 10 data items at once than to write them to memory every time.
-`
+About temporary mode
+`Temporary mode is when data is stored in a Map data structure until you manually synchronize it, which helps you avoid excessive memory writes. It is better to save 10 data items at once than to write them to memory every time.`
+
 ```dart
   preferences.startTemporaryMode();
 
