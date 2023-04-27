@@ -68,7 +68,7 @@ class User extends Writable {
   User({
     required this.name,
     required this.age,
-`  });
+  });
 
   @override
   String key => name;
