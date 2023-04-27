@@ -40,7 +40,7 @@ await preferences.setDouble('decimal', 1.5);
 await preferences.setString('action', 'Start');
 
 //Save writable object
-await preferences.saveObject(User(name: 'averageName', age: 12));
+await preferences.saveObject(User(name: 'user', age: 12));
 
 ```
 ### Example User Writable object
@@ -91,7 +91,7 @@ final String? action = preferences.getString('action');
 
 final List<String>? keys = preferences.getKeys();
 
-final object = await preferences.getObject('averageName', (map) => User.fromJson(map));
+final object = await preferences.getObject('user', (map) => User.fromJson(map));
 print(object?.name);
 print(object?.age);
 
