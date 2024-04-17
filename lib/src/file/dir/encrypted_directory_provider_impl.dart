@@ -4,7 +4,7 @@ import 'package:jt_preferences/src/encryption/encryption.dart';
 import 'package:jt_preferences/src/file/dir/directory_provider.dart';
 
 class EncryptedDirectoryProviderImpl extends DirectoryProvider {
-  final Encryption _encryptor;
+  final IEncryptor _encryptor;
 
   @override
   Future<String> getFilesDir(String rootPath) async {
@@ -23,6 +23,6 @@ class EncryptedDirectoryProviderImpl extends DirectoryProvider {
   }
 
   EncryptedDirectoryProviderImpl({
-    required Encryption encryptor,
+    required IEncryptor encryptor,
   }) : _encryptor = encryptor;
 }
