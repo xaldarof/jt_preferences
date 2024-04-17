@@ -1,59 +1,59 @@
 import 'dart:async';
 import 'package:jt_preferences/src/core/preferences.dart';
-import 'package:jt_preferences/src/core/read.dart';
 import 'package:jt_preferences/src/core/writable.dart';
 import 'package:jt_preferences/src/core/write.dart';
 import 'package:jt_preferences/src/file/file_manager.dart';
 import 'package:jt_preferences/src/models/write_data.dart';
 
 abstract class PreferencesManager extends Preferences
-    implements Read<Map<String, dynamic>>, Write<WriteData> {
+    implements Write<WriteData> {
   Future<bool> writeByCheckConflicts(Writable object);
+
+  Future<void> initialize();
 }
 
 class PreferencesManagerImpl extends PreferencesManager {
   final FileManager _manager;
-  final StreamController<String> _keyListener =
+  final StreamController<String> _keyListenerStream =
       StreamController<String>.broadcast();
 
+  late Map<String, dynamic> _cache = {};
+
   @override
-  Future<int?> getInt(String key) async {
-    final map = await read();
-    return map[key] as int?;
+  Future<void> initialize() async {
+    _cache = await _manager.read();
   }
 
   @override
-  Future<String?> getString(String key) async {
-    final map = await read();
-    return map[key] as String?;
-  }
-
-  @override
-  Future<Map<String, dynamic>> read() {
-    return _manager.read();
+  String? getString(String key) {
+    return _cache[key];
   }
 
   @override
   Future<bool> setInt(String key, int? value) async {
-    final map = await read();
-    map[key] = value;
-    return await write(WriteData(map: map, updatedKey: key));
+    _cache[key] = value;
+    return await write(WriteData(map: _cache, updatedKey: key));
+  }
+
+  @override
+  int? getInt(String key) {
+    return _cache[key] as int?;
   }
 
   @override
   Future<bool> setString(String key, String? value) async {
-    final map = await read();
-    map[key] = value;
-    return await write(WriteData(map: map, updatedKey: key));
+    _cache[key] = value;
+    return await write(WriteData(map: _cache, updatedKey: key));
   }
 
   @override
   Future<bool> write(WriteData data) async {
+    _keyListenerStream.add(data.updatedKey);
     if (data.map[data.updatedKey] == null) {
       data.map.remove(data.updatedKey);
     }
     await _manager.write(data.map);
-    _keyListener.add(data.updatedKey);
+
     return true;
   }
 
@@ -62,34 +62,30 @@ class PreferencesManagerImpl extends PreferencesManager {
   }) : _manager = manager;
 
   @override
-  Future<bool?> getBoolean(String key) async {
-    final map = await read();
-    return map[key] as bool?;
+  bool? getBoolean(String key) {
+    return _cache[key] as bool?;
   }
 
   @override
-  Future<double?> getDouble(String key) async {
-    final map = await read();
-    return map[key] as double?;
+  double? getDouble(String key) {
+    return _cache[key] as double?;
   }
 
   @override
   Future<bool> setBool(String key, bool? value) async {
-    final map = await read();
-    map[key] = value;
-    return await write(WriteData(map: map, updatedKey: key));
+    _cache[key] = value;
+    return await write(WriteData(map: _cache, updatedKey: key));
   }
 
   @override
   Future<bool> setDouble(String key, double? value) async {
-    final map = await read();
-    map[key] = value;
-    return await write(WriteData(map: map, updatedKey: key));
+    _cache[key] = value;
+    return await write(WriteData(map: _cache, updatedKey: key));
   }
 
   @override
   Stream<String> stream({String? key}) async* {
-    await for (final event in _keyListener.stream) {
+    await for (final event in _keyListenerStream.stream) {
       if (key != null) {
         if (event == key) {
           yield key;
@@ -101,27 +97,25 @@ class PreferencesManagerImpl extends PreferencesManager {
   }
 
   @override
-  Future<bool> contains(String key) async {
-    return (await read()).containsKey(key);
+  bool contains(String key) {
+    return _cache.containsKey(key);
   }
 
   @override
   Future<bool> remove(String key) async {
-    final map = await read();
-    map.remove(key);
-    return await write(WriteData(map: map, updatedKey: key));
+    _cache.remove(key);
+    return await write(WriteData(map: _cache, updatedKey: key));
   }
 
   @override
   Future<bool> clear() async {
-    final map = await read();
-    map.clear();
-    return write(WriteData(map: map, updatedKey: 'null'));
+    _cache.clear();
+    return write(WriteData(map: _cache, updatedKey: 'null'));
   }
 
   @override
-  Future<Map<String, dynamic>> getAll() async {
-    return read();
+  Map<String, dynamic> getAll() {
+    return _cache;
   }
 
   @override
@@ -131,7 +125,7 @@ class PreferencesManagerImpl extends PreferencesManager {
 
   @override
   Future<bool> writeByCheckConflicts(Writable object) async {
-    final map = await read();
+    final map = _cache;
     if (map.containsKey(object.key)) {
       if (object.onConflictStrategy == OnConflictStrategy.remove) {
         map.remove(object.key);
@@ -152,9 +146,8 @@ class PreferencesManagerImpl extends PreferencesManager {
   }
 
   @override
-  Future<T?> getObject<T>(
-      String key, T Function(Map<String, dynamic> map) parse) async {
-    final map = await read();
+  T? getObject<T>(String key, T Function(Map<String, dynamic> map) parse) {
+    final map = _cache;
     if (map.containsKey(key)) {
       return parse((map[key] as Map<String, dynamic>));
     } else {
@@ -163,7 +156,7 @@ class PreferencesManagerImpl extends PreferencesManager {
   }
 
   @override
-  Future<List<String>> getKeys() async {
-    return (await read()).keys.toList();
+  List<String> getKeys() {
+    return _cache.keys.toList();
   }
 }

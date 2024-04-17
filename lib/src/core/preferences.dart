@@ -1,8 +1,6 @@
 import 'writable.dart';
 
-abstract class Preferences implements Set, Get, Clear, StreamListener {
-  //
-}
+abstract class Preferences implements Set, Get, Clear, StreamListener {}
 
 abstract class Set {
   Future<bool> setString(String key, String? value);
@@ -23,22 +21,21 @@ abstract class Clear {
 }
 
 abstract class Get {
-  Future<String?> getString(String key);
+  String? getString(String key);
 
-  Future<int?> getInt(String key);
+  int? getInt(String key);
 
-  Future<double?> getDouble(String key);
+  double? getDouble(String key);
 
-  Future<bool?> getBoolean(String key);
+  bool? getBoolean(String key);
 
-  Future<bool> contains(String key);
+  bool contains(String key);
 
-  Future<Map<String, dynamic>> getAll();
+  Map<String, dynamic> getAll();
 
-  Future<List<String>> getKeys();
+  List<String> getKeys();
 
-  Future<T?> getObject<T>(
-      String key, T Function(Map<String, dynamic> map) parse);
+  T? getObject<T>(String key, T Function(Map<String, dynamic> map) parse);
 }
 
 abstract class StreamListener<T> {
