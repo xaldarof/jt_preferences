@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:jt_preferences/src/core/preferences.dart';
 import 'package:jt_preferences/src/core/writable.dart';
 import 'package:jt_preferences/src/di/lib_di.dart';
@@ -62,8 +60,8 @@ class JtPreferences extends Preferences {
   }
 
   @override
-  Stream<String> listen({String? key}) {
-    return _manager.listen(key: key);
+  Stream<String> stream({String? key}) {
+    return _manager.stream(key: key);
   }
 
   @override
@@ -101,22 +99,4 @@ class JtPreferences extends Preferences {
   Future<List<String>> getKeys() {
     return _manager.getKeys();
   }
-
-  @override
-  void startTemporaryMode() {
-    return _manager.startTemporaryMode();
-  }
-
-  @override
-  void stopTemporaryMode() {
-    return _manager.stopTemporaryMode();
-  }
-
-  @override
-  Future<bool> sync() {
-    return _manager.sync();
-  }
-
-  @override
-  bool get isTemporaryModeEnabled => _manager.isTemporaryModeEnabled;
 }

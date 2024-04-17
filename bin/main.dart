@@ -7,12 +7,12 @@ void main(List<String> args) async {
   final preferences = JtPreferences.getInstance();
 
   //listen only one key
-  preferences.listen(key: 'averageName').listen((event) {
+  preferences.stream(key: 'averageName').listen((event) {
     print("key $event updated");
   });
 
   //listen all changes
-  preferences.listen().listen((event) {
+  preferences.stream().listen((event) {
     print("key $event updated");
   });
 
@@ -34,14 +34,6 @@ void main(List<String> args) async {
   print(object?.name);
   print(object?.age);
 
-  preferences.startTemporaryMode();
-
   preferences.setString('key', 'value');
   preferences.setString('key1', 'value1');
-
-  preferences.stopTemporaryMode();
-  final bool = preferences.isTemporaryModeEnabled;
-
-
-  preferences.sync();
 }

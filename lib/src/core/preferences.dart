@@ -1,8 +1,6 @@
-import 'package:jt_preferences/src/core/mode_manager.dart';
-
 import 'writable.dart';
 
-abstract class Preferences implements Set, Get, Clear, Listener, ModeManager {
+abstract class Preferences implements Set, Get, Clear, StreamListener {
   //
 }
 
@@ -43,6 +41,6 @@ abstract class Get {
       String key, T Function(Map<String, dynamic> map) parse);
 }
 
-abstract class Listener<T> {
-  Stream<String> listen({String? key});
+abstract class StreamListener<T> {
+  Stream<String> stream({String? key});
 }

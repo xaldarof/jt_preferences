@@ -7,7 +7,7 @@ import 'package:test/test.dart';
 
 void main() async {
   JtPreferences.initialize(Directory.current.path,
-      encryptionKey: '16 length encryp');
+      encryptionKey: '16 length encrypt');
   final preferences = JtPreferences.getInstance();
   await preferences.clear();
   group('test save values', () {
@@ -32,7 +32,7 @@ void main() async {
     });
 
     test('test listen key', () async {
-      preferences.listen(key: 'KeySingleKeyListen').listen(
+      preferences.stream(key: 'KeySingleKeyListen').listen(
         expectAsync1(
           (event) {
             expect(event, 'KeySingleKeyListen');

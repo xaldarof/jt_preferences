@@ -88,7 +88,7 @@ class PreferencesManagerImpl extends PreferencesManager {
   }
 
   @override
-  Stream<String> listen({String? key}) async* {
+  Stream<String> stream({String? key}) async* {
     await for (final event in _keyListener.stream) {
       if (key != null) {
         if (event == key) {
@@ -166,22 +166,4 @@ class PreferencesManagerImpl extends PreferencesManager {
   Future<List<String>> getKeys() async {
     return (await read()).keys.toList();
   }
-
-  @override
-  void startTemporaryMode() {
-    _manager.startTemporaryMode();
-  }
-
-  @override
-  void stopTemporaryMode() {
-    _manager.stopTemporaryMode();
-  }
-
-  @override
-  Future<bool> sync() {
-    return _manager.sync();
-  }
-
-  @override
-  bool get isTemporaryModeEnabled => _manager.isTemporaryModeEnabled;
 }
