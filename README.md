@@ -19,7 +19,7 @@ Here are small examples that show you how to use the package.
 ```dart
 void main(List<String> args) async {
   //for example (data/data/com.example.application/) without absolute path
-  JtPreferences.initialize("path/path", encryptionKey: '16 length encryption key');
+  await JtPreferences.initialize("path/path", encryptionKey: '16 length encryption key');
   //Data will be encrypted if encryptionKey is not null
 }
 ```

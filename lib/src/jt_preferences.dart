@@ -14,9 +14,10 @@ class JtPreferences extends Preferences {
     return _instance;
   }
 
-  static initialize(String path, {String? encryptionKey}) {
+  static Future<void> initialize(String path, {String? encryptionKey}) async {
     initDependencies(path, encryptionKey: encryptionKey);
-    _manager = injector.get()..initialize();
+    _manager = injector.get<PreferencesManager>();
+    await _manager.initialize();
   }
 
   @override
