@@ -1,6 +1,6 @@
 import 'decrypt.dart';
 import 'encrypt.dart';
 
-abstract class Encryption implements Encrypt, Decrypt {
+abstract class IEncryptor implements Encrypt, Decrypt {
   String get key;
 }

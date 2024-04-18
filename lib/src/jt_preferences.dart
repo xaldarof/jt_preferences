@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:jt_preferences/src/core/preferences.dart';
 import 'package:jt_preferences/src/core/writable.dart';
 import 'package:jt_preferences/src/di/lib_di.dart';
@@ -18,7 +16,7 @@ class JtPreferences extends Preferences {
 
   static initialize(String path, {String? encryptionKey}) {
     initDependencies(path, encryptionKey: encryptionKey);
-    _manager = injector.get();
+    _manager = injector.get()..initialize();
   }
 
   @override
@@ -32,22 +30,22 @@ class JtPreferences extends Preferences {
   }
 
   @override
-  Future<int?> getInt(String key) {
+  int? getInt(String key) {
     return _manager.getInt(key);
   }
 
   @override
-  Future<String?> getString(String key) {
+  String? getString(String key) {
     return _manager.getString(key);
   }
 
   @override
-  Future<bool?> getBoolean(String key) {
+  bool? getBoolean(String key) {
     return _manager.getBoolean(key);
   }
 
   @override
-  Future<double?> getDouble(String key) {
+  double? getDouble(String key) {
     return _manager.getDouble(key);
   }
 
@@ -62,12 +60,12 @@ class JtPreferences extends Preferences {
   }
 
   @override
-  Stream<String> listen({String? key}) {
-    return _manager.listen(key: key);
+  Stream<String> stream({String? key}) {
+    return _manager.stream(key: key);
   }
 
   @override
-  Future<bool> contains(String key) {
+  bool contains(String key) {
     return _manager.contains(key);
   }
 
@@ -82,7 +80,7 @@ class JtPreferences extends Preferences {
   }
 
   @override
-  Future<Map<String, dynamic>> getAll() {
+  Map<String, dynamic> getAll() {
     return _manager.getAll();
   }
 
@@ -92,31 +90,12 @@ class JtPreferences extends Preferences {
   }
 
   @override
-  Future<T?> getObject<T>(
-      String key, T Function(Map<String, dynamic> map) parse) {
+  T? getObject<T>(String key, T Function(Map<String, dynamic> map) parse) {
     return _manager.getObject(key, parse);
   }
 
   @override
-  Future<List<String>> getKeys() {
+  List<String> getKeys() {
     return _manager.getKeys();
   }
-
-  @override
-  void startTemporaryMode() {
-    return _manager.startTemporaryMode();
-  }
-
-  @override
-  void stopTemporaryMode() {
-    return _manager.stopTemporaryMode();
-  }
-
-  @override
-  Future<bool> sync() {
-    return _manager.sync();
-  }
-
-  @override
-  bool get isTemporaryModeEnabled => _manager.isTemporaryModeEnabled;
 }

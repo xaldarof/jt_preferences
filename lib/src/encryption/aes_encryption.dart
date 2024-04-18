@@ -2,7 +2,7 @@ import 'package:encrypt/encrypt.dart';
 
 import 'encryption.dart';
 
-abstract class AesEncryption implements Encryption {}
+abstract class AesEncryption implements IEncryptor {}
 
 class AesEncryptionImpl implements AesEncryption {
   final String _encryptionKey;

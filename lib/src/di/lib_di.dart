@@ -18,7 +18,7 @@ void initDependencies(String path, {String? encryptionKey}) {
   injector.registerSingleton<Mapper>(DataMapper());
 
   if (encryptionKey != null) {
-    injector.registerSingleton<Encryption>(
+    injector.registerSingleton<IEncryptor>(
         AesEncryptionImpl(encryptionKey: encryptionKey));
 
     injector.registerSingleton<DirectoryProvider>(
