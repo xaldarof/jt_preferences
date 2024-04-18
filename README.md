@@ -91,7 +91,7 @@ final String? action = preferences.getString('action');
 
 final List<String>? keys = preferences.getKeys();
 
-final object = await preferences.getObject('user', (map) => User.fromJson(map));
+final object = preferences.getObject('user', (map) => User.fromJson(map));
 print(object?.name);
 print(object?.age);
 
