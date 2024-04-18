@@ -21,16 +21,15 @@ void main(List<String> args) async {
   await preferences.setDouble('weight', 18.5);
   await preferences.setBool('isFree', false);
 
-  await preferences.contains('isFree'); //true
+  preferences.contains('isFree'); //true
   await preferences.remove('isFree');
-  await preferences.contains('isFree'); //false
+  preferences.contains('isFree'); //false
 
   //Save writable object
   await preferences.saveObject(User(name: 'averageName', age: 12));
 
   //get writable object
-  final object =
-      await preferences.getObject('averageName', (map) => User.fromJson(map));
+  final object = preferences.getObject('averageName', (map) => User.fromJson(map));
   print(object?.name);
   print(object?.age);
 
