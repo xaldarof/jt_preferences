@@ -64,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter() {
     _counter++;
-    JtPreferences.getInstance().setString("key", "value${_counter}");
+    JtPreferences.getInstance().setString("key", "value$_counter");
   }
 
   @override
